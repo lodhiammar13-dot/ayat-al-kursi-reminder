@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import time
 from datetime import datetime
-import winsound
+
 st.set_page_config(page_title="Prayer Alarm App", page_icon="🕌", layout="centered")
 # Get prayer times
 url = "https://api.aladhan.com/v1/timingsByCity?city=Dubai&country=UAE&method=2"
@@ -29,7 +29,10 @@ while True:
                 f"It's {prayer} time! Remember to read Ayatul Kursi 🤲"
             )
 
-            winsound.beep(1000, 1000)
+            audio_file = open("alarm.mp3", "rb")
+            audio_bytes = audio_file.read()
+            
+            st.audio(audio_bytes, format="audio/mp3")
 
             time.sleep(60)
 
